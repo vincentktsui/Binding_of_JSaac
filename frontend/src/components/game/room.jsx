@@ -106,10 +106,10 @@ class Room extends React.Component {
         if (this.state.currentCharacter) {
             let roomNumber = room[(this.state.currentCharacter.room % 16) * this.state.currentCharacter.floor];
             roomImg = RoomSelector(this.state.currentCharacter.room);
-            // trapsInRoom = TrapsHelper.GetTraps(roomNumber.id, traps);
-            // trapsDisplay = trapsInRoom.map(trap => (
-            //     TrapsHelper.displayTraps(trap)
-            // ))
+            trapsInRoom = TrapsHelper.GetTraps(roomNumber.id, traps);
+            trapsDisplay = trapsInRoom.map(trap => (
+                TrapsHelper.displayTraps(trap)
+            ))
             currentChar = <DisplayCharacters 
                 char={this.state.currentCharacter}
                 movement={true}
@@ -120,27 +120,23 @@ class Room extends React.Component {
                 floorNumber={Object.values(locations)[0].floor}
                 />
 
-
-            // uncomment the line below if you want to test each room
-            // let roomNumber = room[10] 
-
             
-            // let monsterCountPerRoom = [];
-            // for (let i = 0; i < monsters.length; i++) {
-            //     if (monsters[i].roomId === roomNumber.id) {
-            //         monsterCountPerRoom.push(monsters[i])
-            //     }
-            // }
+            let monsterCountPerRoom = [];
+            for (let i = 0; i < monsters.length; i++) {
+                if (monsters[i].roomId === roomNumber.id) {
+                    monsterCountPerRoom.push(monsters[i])
+                }
+            }
 
-            // monstersInRoom = monsterCountPerRoom.map(monster => (
-            //     monstersInRoom = <DisplayMonsters 
-            //     monster={monster} 
-            //     positionX={monster.xPos} 
-            //     positionY={monster.yPos}
-            //     playerX={this.state.currentCharacter.xPixel}
-            //     playerY={this.state.currentCharacter.yPixel}
-            //     />
-            // ))
+            monstersInRoom = monsterCountPerRoom.map(monster => (
+                monstersInRoom = <DisplayMonsters 
+                monster={monster} 
+                positionX={monster.xPos} 
+                positionY={monster.yPos}
+                playerX={this.state.currentCharacter.xPixel}
+                playerY={this.state.currentCharacter.yPixel}
+                />
+            ))
         }
         // tiles are 64 x 64
         // rooms 15x9, 960 x 576
@@ -161,8 +157,8 @@ class Room extends React.Component {
                 <Stage width={1088} height={704}>
                     <Layer>
                         <Image image={roomImg} />
-                        {/* {monstersInRoom} */}
-                        {/* {trapsDisplay} */}
+                        {monstersInRoom}
+                        {trapsDisplay}
                         {currentChar}
                         {otherChar}
                     </Layer>

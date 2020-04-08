@@ -6,12 +6,17 @@ import logo from '../../assets/logo.png'
 class SessionForm extends React.Component {
     constructor(props) {
         super(props);
+        this.props = props;
         this.state = {
             username: "",
             password: "",
             password2: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.props.clearSessionErrors();
     }
 
     handleChange(type) {
@@ -46,6 +51,12 @@ class SessionForm extends React.Component {
         ) : (
             null
         )
+
+        console.log(this.props.errors)
+
+        const errors = Object.values(this.props.errors).map( (error) => {
+            return <li>{error}</li>
+        })
         return (
 
             <div className="home-page">
@@ -77,6 +88,9 @@ class SessionForm extends React.Component {
                             </label>
                             <br/>
                             {confirmPassword}
+                            <ul>
+                                {errors}
+                            </ul>
                             <div className="session-login-signup-buttons">
                                 <button onClick={this.handleSubmit} className="session-button">
                                     {typeOfForm}
