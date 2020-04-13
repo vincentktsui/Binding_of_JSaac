@@ -48,6 +48,20 @@ class Room extends React.Component {
         }
         this.state = { currentCharacter, otherCharacter, roomImg};
         this.childSetState = this.childSetState.bind(this);
+        this.updateDatabase = this.updateDatabase.bind(this);
+    }
+
+    updateDatabase(currentCharacter) {
+        let characters = {};
+        characters[currentCharacter._id] = currentCharacter;
+        if (this.state.otherCharacter) {
+            characters[this.state.otherCharacter._id] = this.state.otherCharacter;
+        }
+        let data = {
+            lobbykey: localStorage.lobbykey,
+            characters: characters
+        }
+        this.props.updateDatabase(data, currentCharacter._id, currentCharacter.room);
     }
 
     childSetState(state) {
@@ -78,7 +92,7 @@ class Room extends React.Component {
                 if (this.props.locations[currentState.otherCharacter._id].room !== data.room) {
                     this.props.updateLocation(data.room, currentState.otherCharacter._id);
                 }
-                if (this.props.characters[currentState.otherCharacter._id].currentHP != data.currentHP) {
+                if (this.props.characters[currentState.otherCharacter._id].currentHP !== data.currentHP) {
                     this.props.updateHP(currentState.otherCharacter._id, data.currentHP);
                 }
                 this.setState(currentState);
@@ -130,6 +144,7 @@ class Room extends React.Component {
                 roomNumber={roomNumber}
                 floorNumber={Object.values(locations)[0].floor}
                 updateHP={this.props.updateHP}
+                updateDatabase={this.updateDatabase}
                 />
 
             // tiles are 64 x 64
@@ -140,8 +155,8 @@ class Room extends React.Component {
             // character sprite 48 x 82
             let player2X, player2Y;
             if (this.state.otherCharacter &&
-                this.props.locations[this.state.currentCharacter._id].floor == this.props.locations[this.state.otherCharacter._id].floor &
-                this.props.locations[this.state.currentCharacter._id].room == this.props.locations[this.state.otherCharacter._id].room
+                this.props.locations[this.state.currentCharacter._id].floor === this.props.locations[this.state.otherCharacter._id].floor &
+                this.props.locations[this.state.currentCharacter._id].room === this.props.locations[this.state.otherCharacter._id].room
             ) {
                 otherChar = <DisplayCharacters
                     char={this.state.otherCharacter}

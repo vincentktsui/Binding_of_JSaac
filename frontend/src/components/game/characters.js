@@ -126,6 +126,7 @@ class DisplayCharacters extends React.Component {
     }
 
     move(dir) {
+        let moving = false;
         let maxFrames = 7
         let currentState = Object.assign({}, this.props.char)
         let { roomNumber, char, floorNumber, moveRoom } = this.props
@@ -145,7 +146,10 @@ class DisplayCharacters extends React.Component {
                         currentState.yPixel = 660;
                         currentState.top = currentState.yPixel + 40;
                         currentState.bottom = currentState.yPixel + 80;
-                        moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.topExit);
+
+                        // moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.topExit);
+                        currentState.room = roomNumber.topExit;
+                        moving = true;
                     } else if (roomNumber.topExit === -1 && currentState.yPixel - 8 < 0) {
                         currentState.yPixel = currentState.yPixel;
                     } else {
@@ -171,7 +175,10 @@ class DisplayCharacters extends React.Component {
                         currentState.yPixel = -96;
                         currentState.top = currentState.yPixel + 40;
                         currentState.bottom = currentState.yPixel + 80;
-                        moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.bottomExit);
+
+                        // moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.bottomExit);
+                        currentState.room = roomNumber.bottomExit;
+                        moving = true;
                     } else if (roomNumber.bottomExit === -1 && currentState.yPixel + 8 > 576) {
                         currentState.yPixel = currentState.yPixel;
                     } else {
@@ -192,7 +199,9 @@ class DisplayCharacters extends React.Component {
                         currentState.xPixel = 1056
                         currentState.left = currentState.xPixel + 48;
                         currentState.right = currentState.xPixel + 96;
-                        moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.leftExit);
+                        // moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.leftExit);
+                        currentState.room = roomNumber.leftExit;
+                        moving = true;
                     } else if (roomNumber.leftExit === -1 && currentState.xPixel - 8 < 64) {
                         currentState.xPixel = currentState.xPixel;
                     } else {
@@ -214,7 +223,9 @@ class DisplayCharacters extends React.Component {
                         currentState.xPixel = 10
                         currentState.left = currentState.xPixel + 48;
                         currentState.right = currentState.xPixel + 96;
-                        moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.rightExit);
+                        // moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.rightExit);
+                        currentState.room = roomNumber.rightExit;
+                        moving = true;
                     } else if (roomNumber.rightExit === -1 && currentState.xPixel + 8 < 992) {
                         currentState.xPixel = currentState.xPixel;
                     } else {
@@ -233,8 +244,6 @@ class DisplayCharacters extends React.Component {
                 } else if (currentState.animation === "runningLeft" || currentState.animation === "meleeLeft") {
                     currentState.animation = "meleeLeft"
                 }
-
-                debugger
                
                 currentState.frames = 0
             default:
@@ -245,7 +254,9 @@ class DisplayCharacters extends React.Component {
         if (dir !== "space") {
             currentState.frames = (currentState.frames === maxFrames) ? 0 : currentState.frames + 1;
         }
-
+        if (moving) {
+            this.props.updateDatabase(currentState);
+        }
         this.props.childSetState(currentState);
         let that = this;
     }
