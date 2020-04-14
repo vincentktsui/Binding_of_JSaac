@@ -39,7 +39,8 @@ class LevelUp extends React.Component {
         const increaseUnavailable = this.state.availableStatPoints === 0;
         const decreaseUnavailable = this.state.pointsSpent === 0;
         const finalizeUnavailable = this.state.pointsSpent != this.props.character.availableStatPoints;
-        const showLevelUp = this.props.character.availableStatPoints > 0 ? 'level-up-box' : 'level-up-box hidden-level-up';
+        // const showLevelUp = this.props.character.availableStatPoints > 0 ? 'level-up-box' : 'level-up-box hidden-level-up';
+        const showLevelUp = 'level-up-box';
 
         return (
             <div className={showLevelUp}>Level Up!
