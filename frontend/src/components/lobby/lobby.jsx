@@ -56,7 +56,7 @@ class LobbyMain extends React.Component {
                 {gameCharacters[lobby.player1].name}
             </div>
             <div className="lobby-player1-char-model">
-                <Stage width={200} height={300}>
+                <Stage width={200} height={200}>
                     <Layer>
                         <Sprite
                             x={50}
@@ -109,7 +109,7 @@ class LobbyMain extends React.Component {
                     {gameCharacters[lobby.player2].name}
                 </div>
                 <div className="lobby-player2-char-model">
-                    <Stage width={200} height={300}>
+                    <Stage width={200} height={200}>
                         <Layer>
                             <Sprite
                                 x={50}
@@ -150,6 +150,16 @@ class LobbyMain extends React.Component {
                 <div className="player1-player2-container">
                     {this.renderPlayer1()}
                     {this.renderPlayer2()}
+                </div>
+                <div className="lobby-instructions">
+                    <p className="lobby-title">
+                        Adventure awaits!
+                </p>
+                    <ul>
+                        <li className="instructions">
+                            Invite a friend to join you or start your own adventure!
+                        </li>
+                    </ul>
                 </div>
             </div>
         ) : (

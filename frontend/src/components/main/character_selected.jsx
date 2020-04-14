@@ -66,7 +66,7 @@ class CharacterSelected extends React.Component {
                     {character.name}
                 </div>
                 <div className="character-selected-canvas">
-                    <Stage width={200} height={300}>
+                    <Stage width={200} height={200}>
                         <Layer>
                             <Sprite 
                                 x={50}
@@ -86,6 +86,19 @@ class CharacterSelected extends React.Component {
                             />
                         </Layer>
                     </Stage>
+                </div>
+                <div className="lobby-instructions">
+                    <p className="lobby-title">
+                        A valiant hero is chosen!
+                </p>
+                    <ul>
+                        <li className="instructions">
+                            If you have a code from a friend, choose "Join Lobby" above and enter the code!
+                        </li>
+                        <li className="instructions">
+                            If you want a shiny new lobby, pick "Create Lobby" instead.
+                        </li>
+                    </ul>
                 </div>
             </div>
         ) : (

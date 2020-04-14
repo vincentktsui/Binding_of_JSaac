@@ -12,13 +12,14 @@
 .game-main {
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 
 .room-main {
   margin-right: 30px;
   border-radius: 10px;
   overflow: hidden;
-  padding: 100px;
+  padding: 10px;
   background-color: rgba(238, 239, 241, 0.699);
   border-radius: 10px;
 }

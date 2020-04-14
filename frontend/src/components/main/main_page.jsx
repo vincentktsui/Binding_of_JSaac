@@ -45,22 +45,13 @@ class MainPage extends React.Component {
         const displayInstructions = (this.props.match.isExact) ? (
             <div className="welcome-instructions">
                 <p className="welcome-title">
-                    It's too dangerous to go alone, take this!
+                    It's dangerous to go alone!
                 </p>
-                <ol>
+                <ul>
                     <li className="instructions">
-                        Select a character on the right to choose the character you want to play.
+                      Select a character on the right or create a new character by clicking the "New Character" button above.
                     </li>
-                    <li className="instructions">
-                        If you do not have a character, create a new character by clicking the "New Character" button above
-                    </li>
-                    <li className="instructions">
-                        Create a lobby by clicking the "Find a Lobby" button above.
-                    </li>
-                    <li className="instructions">
-                        Share the lobby key with a friend or choose to go on your adventure alone.
-                    </li>
-                </ol>
+                </ul>
             </div>
         ) : (
             null
@@ -92,7 +83,9 @@ class MainPage extends React.Component {
                     <Link to="/main">
                       <img className="main-logo-image" src={logo} alt="logo" />
                     </Link>
-                    {displayCharacters}
+                    <div className="character-menu">
+                      {displayCharacters}
+                    </div>
                   </div>
                 </Route>
               </Switch>
