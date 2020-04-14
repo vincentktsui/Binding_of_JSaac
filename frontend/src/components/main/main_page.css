@@ -6,19 +6,26 @@
     position: relative;
     display: flex;
 }
+
+.main-content-container {
+    width: 1050px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
     
 .main-character-info {
     background-color: rgba(238, 239, 241, 0.699);
     border-radius: 10px;
-    width: 70%;
-    height: 88.4%;
-    margin: 4% 1% 1% 2%;
+    width: 700px;
+    height: 500px;
+    margin: auto;
 }
 
 .main-character-select-side-bar {
-    width: 25%;
-    height: 72.5%;
-    margin-top: 5%;
+    width: 300px;
+    height: 350px;
+    margin: auto;
     padding-top: 150px;
     background-color: rgba(238, 239, 241, 0.699);
     display: flex;
@@ -36,7 +43,7 @@
 }
 
 .side-bar-character-box {
-    width: 90%;
+    width: 260px;
     height: 125px;
     background-color: #4e6883;
     display: flex;
@@ -61,11 +68,11 @@
 }
 
 .main-logo-image {
-    width: 100%;
+    width: 300px;
     position: absolute;
     z-index: 3;
-    width: 25%;
-    left: 73%;
+    top: 41px;
+    right: 170px;
 }
 
 .side-bar-character-image {
@@ -188,14 +195,6 @@
 
 .redirect-buttons:hover {
     border-bottom: 2px solid rgb(62, 84, 114); 
-}
-
-.main-logo-image {
-    width: 100%;
-    position: absolute;
-    z-index: 3;
-    width: 25%;
-    left: 73%;
 }
 
 .welcome-instructions {

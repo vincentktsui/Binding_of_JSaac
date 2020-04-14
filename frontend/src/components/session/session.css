@@ -1,6 +1,5 @@
 .session-page-session-form {
     width: 600px;
-    height: 270px;
     position: absolute;
     left: 50%;
     margin-left: -300px;
@@ -50,15 +49,13 @@
 }
 
 .session-login-signup-buttons {
-    margin-top: 10%;
+    margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
     align-content: space-between;
 }
 
-.session-login-signup-buttons button,
-.session-login-signup-buttons a {
-    font-size: 18px;
+.session-login-signup-buttons button {
     background-color: transparent;
     border: 2px solid rgb(62, 84, 114);
     color:rgb(62, 84, 114);
@@ -67,6 +64,10 @@
     font-weight: bold;
     border-radius: 4px;
     width: 150px;
+}
+
+.session-button {
+    font-size: 18px;
 }
 
 .session-login-signup-buttons button {
@@ -79,10 +80,34 @@
     margin-right: 0;
 }
 
-.session-login-signup-buttons button:hover,
-.session-login-signup-buttons a:hover {
+.session-login-signup-buttons button:hover {
     background-color: rgb(62, 84, 114); 
     color: white;
+}
+
+.switch-session-button {
+    font-size: 14px;
+}
+
+.switch-session-button a {
+    text-decoration: none;
+    color:rgb(62, 84, 114);
+}
+
+.switch-session-button a:hover {
+    color: white;
+}
+
+.session-errors {
+    font-size: 12px;
+    color: #7f273e;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.session-form .login-hide-confirmation {
+    display: none;
+    height: 0;
 }
 
 @media only screen and (max-width: 800px) {

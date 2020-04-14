@@ -19,7 +19,7 @@
 
 .home-page-session-form {
     width: 600px;
-    height: 250px;
+    height: 220px;
     position: absolute;
     left: 50%;
     margin-left: -300px;
@@ -63,11 +63,11 @@
     border: 2px solid  rgb(62, 84, 114);
     background-color: transparent;
     transition-duration: 0.4s;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
     padding: 10px;
     border-radius: 5px;
-    width: 200px;
+    width: 250px;
     cursor: pointer;
 }
 

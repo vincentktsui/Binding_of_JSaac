@@ -66,29 +66,38 @@ class MainPage extends React.Component {
             null
         )
         return (
-            <div className="main-page">
-                <div className="main-character-info">
-                    <NavBarContainer />
-                    {displayInstructions}
-                    <ProtectedRoute path="/main/:characterId" component={CharacterSelectedContainer} />
-                    <ProtectedRoute path="/main/create" component={CreateCharacterContainer}/>
-                    <ProtectedRoute path="/main/lobby/" component={LobbyContainer} />
-                </div>
-                <Link to='/main'>
-                    <img className="main-logo-image" src={logo} alt="logo" />
-                </Link>
-                
-                <Switch>
-                    <Route path="/main/lobby">
-                        {nullEle}
-                    </Route>
-                    <Route path="/main/">
-                        <div className="main-character-select-side-bar">
-                            {displayCharacters}
-                        </div>
-                    </Route>
-                </Switch>
+          <div className="main-page">
+            <div className="main-content-container">
+              <div className="main-character-info">
+                <NavBarContainer />
+                {displayInstructions}
+                <ProtectedRoute
+                  path="/main/:characterId"
+                  component={CharacterSelectedContainer}
+                />
+                <ProtectedRoute
+                  path="/main/create"
+                  component={CreateCharacterContainer}
+                />
+                <ProtectedRoute
+                  path="/main/lobby/"
+                  component={LobbyContainer}
+                />
+              </div>
+
+              <Switch>
+                <Route path="/main/lobby">{nullEle}</Route>
+                <Route path="/main/">
+                  <div className="main-character-select-side-bar">
+                    <Link to="/main">
+                      <img className="main-logo-image" src={logo} alt="logo" />
+                    </Link>
+                    {displayCharacters}
+                  </div>
+                </Route>
+              </Switch>
             </div>
+          </div>
         );
     }
 }

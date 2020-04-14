@@ -12,6 +12,7 @@ class SessionForm extends React.Component {
             password2: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.clearErrors = this.clearErrors.bind(this);
     }
 
     handleChange(type) {
@@ -25,13 +26,17 @@ class SessionForm extends React.Component {
             // .then(() => this.props.history.push("/main"))
     }
 
+    clearErrors(e) {
+        this.props.clearErrors();
+    }
+
     render() {
         const typeOfForm = this.props.formType === "signup" ? "Sign Up" : "Log In"
-        const toSignUpPage = this.props.formType === "login" ? (
-            <Link to="/register" className="login-signup-button">Sign Up</Link>
+        const toOtherForm = this.props.formType === "login" ? (
+            <Link to="/register">New? Sign Up!</Link>
         ) : (
-            <Link to="/" className="session-home-button">Cancel</Link>
-        )
+            <Link to="/login">Returning? Login!</Link>
+        );
 
         const confirmPassword = this.props.formType === "signup" ? (
             <label className="confirm-password-label">Confirm: 
@@ -46,6 +51,16 @@ class SessionForm extends React.Component {
         ) : (
             null
         )
+
+        let usernameErrors = this.props.formType === "signup" ? 
+            this.props.errors.handle : this.props.errors.username;
+        let passwordErrors = this.props.errors.password;
+        let password2Errors = this.props.errors.password2;
+        let confirmPasswordClass = this.props.formType === "signup" ?
+            'confirm-password-label' : 'confirm-password-label login-hide-confirmation'
+        let confirmPasswordErrorsClass = this.props.formType === "signup" ?
+            'session-errors' : 'session-errors login-hide-confirmation'
+
         return (
 
             <div className="home-page">
@@ -64,6 +79,9 @@ class SessionForm extends React.Component {
                                     className="session-inputs"
                                 />
                             </label>
+                            <div className="session-errors">
+                                {usernameErrors}
+                            </div>
                             <br/>
 
                             <label className="password-label">Password: 
@@ -75,13 +93,29 @@ class SessionForm extends React.Component {
                                     className="session-inputs"
                                 />
                             </label>
+                            <div className="session-errors">
+                                {passwordErrors}
+                            </div>
                             <br/>
-                            {confirmPassword}
+                            <label className={confirmPasswordClass}>Confirm:
+                                <input
+                                    type="password"
+                                    onChange={this.handleChange("password2")}
+                                    value={this.state.password2}
+                                    placeholder="Confirm Password"
+                                    className="confirm-session-input"
+                                />
+                            </label>
+                            <div className={confirmPasswordErrorsClass}>
+                                {password2Errors}
+                            </div>
                             <div className="session-login-signup-buttons">
                                 <button onClick={this.handleSubmit} className="session-button">
                                     {typeOfForm}
                                 </button>
-                                {toSignUpPage}
+                                <button onClick={this.props.clearErrors} className="switch-session-button">
+                                    {toOtherForm}
+                                </button>
                             </div>
                         </form>
                     </div>
