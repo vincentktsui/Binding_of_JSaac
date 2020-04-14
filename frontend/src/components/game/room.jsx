@@ -154,7 +154,7 @@ class Room extends React.Component {
         }
         return (
             <div className="room-main">
-                <Stage width={773} height={500}>
+                <Stage width={1088} height={704}>
                     <Layer>
                         <Image image={roomImg} />
                         {monstersInRoom}
