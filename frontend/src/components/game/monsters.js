@@ -6,11 +6,12 @@ import reaper1 from '../../assets/animations/reaper1_animation.png'
 import reaper2 from '../../assets/animations/reaper2_animation.png'
 import reaper3 from '../../assets/animations/reaper3_animation.png'
 import { Sprite } from 'react-konva';
+import gameVariables from './game_variables';
 
-const MAXXPOS = 1024;
-const MINXPOS = 64;
-const MAXYPOS = 640;
-const MINYPOS = 64;
+const MAXXPOS = gameVariables.maxWidth;
+const MINXPOS = gameVariables.minWidth;
+const MAXYPOS = gameVariables.maxHeight;
+const MINYPOS = gameVariables.minHeight;
 const RANDOMMOVEPOSITION = [-5, 0, 5]
 
 class DisplayMonsters extends React.Component {
@@ -18,8 +19,8 @@ class DisplayMonsters extends React.Component {
         super(props);
         this.props = props;
         this.state = {
-            monsterXPos: (this.props.positionX === 15) ? (this.props.positionX * 64) : ((this.props.positionX * 64) + 64),
-            monsterYPos: (this.props.positionY === 9) ? (this.props.positionY * 64) : ((this.props.positionY * 64) + 64),
+            monsterXPos: (this.props.positionX === gameVariables.innerTilesToWidth) ? (this.props.positionX * gameVariables.tileWidth) : ((this.props.positionX * gameVariables.tileWidth) + gameVariables.tileWidth),
+            monsterYPos: (this.props.positionY === gameVariables.innerTilesToHeight) ? (this.props.positionY * gameVariables.tileHeight) : ((this.props.positionY * gameVariables.tileHeight) + gameVariables.tileHeight),
             frames: 0,
             monsterSprite: 1
         }

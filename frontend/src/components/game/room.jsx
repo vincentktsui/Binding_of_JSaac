@@ -4,6 +4,8 @@ import RoomSelector from './room_selector';
 import * as TrapsHelper from './traps.js'
 import DisplayMonsters from './monsters.js';
 import DisplayCharacters from './characters.js';
+import gameVariable from './game_variables';
+import gameVariables from './game_variables';
 
 
 class Room extends React.Component {
@@ -25,12 +27,12 @@ class Room extends React.Component {
         currentCharacter = Object.assign(currentCharacter, locations[currentCharacter._id])
         currentCharacter.frames = 0;
         currentCharacter.animation = "runningRight";
-        currentCharacter.xPixel = currentCharacter.xPos * 64;
-        currentCharacter.yPixel = currentCharacter.yPos * 64;
+        currentCharacter.xPixel = currentCharacter.xPos * gameVariables.tileWidth;
+        currentCharacter.yPixel = currentCharacter.yPos * gameVariables.tileHeight;
         // currentCharacter.left = currentCharacter.xPixel;
-        currentCharacter.right = currentCharacter.xPixel + 48;
+        currentCharacter.right = currentCharacter.xPixel + gameVariables.spriteWidth;
         // currentCharacter.top = currentCharacter.yPixel;
-        currentCharacter.bottom = currentCharacter.yPixel + 82;
+        currentCharacter.bottom = currentCharacter.yPixel + gameVariables.spriteHeight;
         delete currentCharacter.character;
         currentCharacter.invincible = false;
 
@@ -38,8 +40,8 @@ class Room extends React.Component {
             otherCharacter = Object.assign(otherCharacter, locations[otherCharacter._id])
             otherCharacter.frames = 0;
             otherCharacter.animation = "runningRight";
-            otherCharacter.xPixel = otherCharacter.xPos * 64;
-            otherCharacter.yPixel = otherCharacter.yPos * 64;
+            otherCharacter.xPixel = otherCharacter.xPos * gameVariables.tileWidth;
+            otherCharacter.yPixel = otherCharacter.yPos * gameVariables.tileWidth;
             delete otherCharacter.character;
         }
         this.state = { currentCharacter, otherCharacter, roomImg};
@@ -65,7 +67,7 @@ class Room extends React.Component {
                 room: localStorage.lobbykey, 
                 char: this.state.currentCharacter
             });
-        }, 1000 / 30)
+        }, gameVariables.fps)
 
         window.socket.on("receiveDungeon", data => {
             if (data._id !== localStorage.lobbycharacter) {
@@ -105,7 +107,7 @@ class Room extends React.Component {
         let monstersInRoom;
 
         if (this.state.currentCharacter) {
-            let roomNumber = room[(this.state.currentCharacter.room % 16) * this.state.currentCharacter.floor];
+            let roomNumber = room[(this.state.currentCharacter.room % gameVariables.numRooms) * this.state.currentCharacter.floor];
             roomImg = RoomSelector(this.state.currentCharacter.room);
             trapsInRoom = TrapsHelper.GetTraps(roomNumber.id, traps);
             trapsDisplay = trapsInRoom.map(trap => (
@@ -154,7 +156,7 @@ class Room extends React.Component {
         }
         return (
             <div className="room-main">
-                <Stage width={773} height={500}>
+                <Stage width={gameVariables.roomWidth} height={gameVariables.roomHeight}>
                     <Layer>
                         <Image image={roomImg} />
                         {monstersInRoom}

@@ -4,6 +4,7 @@ import rogue from '../../assets/animations/rogue/rogue_animations.png';
 import mage from '../../assets/animations/mage/mage_animations.png';
 import { Sprite } from 'react-konva';
 import characterAnimations from './character_animations';
+import gameVariables from './game_variables';
 
 class DisplayCharacters extends React.Component {
     constructor(props) {
@@ -79,7 +80,8 @@ class DisplayCharacters extends React.Component {
         //         this.takeDamage(1);
         //     }
         // }
-    }
+    };
+
     checkWalls(left, right, top, bottom) {
         if (left < 0) {
             if (top < 300 || bottom > 400) {
@@ -119,7 +121,7 @@ class DisplayCharacters extends React.Component {
                     currentState.xPixel, currentState.right, 
                     currentState.yPixel - 8, currentState.bottom - 8)) {
 
-                    if (roomNumber.topExit !== -1 && (currentState.yPixel - 8 < -64 && (currentState.xPixel > 472 && currentState.xPixel < 562))) {
+                    if (roomNumber.topExit !== -1 && (currentState.yPixel - 8 < -gameVariables.tileHeight && (currentState.xPixel > 472 && currentState.xPixel < 562))) {
                         currentState.room = roomNumber.topExit;
                         currentState.yPixel = 660;
                         currentState.bottom = currentState.yPixel + 82;
@@ -132,7 +134,7 @@ class DisplayCharacters extends React.Component {
                     }
                 } 
                 
-                currentState.yPos = Math.round(currentState.yPixel / 64); 
+                currentState.yPos = Math.round(currentState.yPixel / gameVariables.tileHeight); 
                 break;
             case "down":
                 // if (currentState.yPixel + 8 < 576 || (currentState.xPixel > 500 && currentState.xPixel < 544)) {
@@ -152,7 +154,7 @@ class DisplayCharacters extends React.Component {
                     }
                 } 
 
-                currentState.yPos = Math.round(currentState.yPixel / 64); 
+                currentState.yPos = Math.round(currentState.yPixel / gameVariables.tileHeight); 
                 break;
             case "left":
                 // if (currentState.xPixel - 8 > 64 || (currentState.yPixel > 308 && currentState.yPixel < 352)) {
@@ -164,7 +166,7 @@ class DisplayCharacters extends React.Component {
                         currentState.xPixel = 1056
                         currentState.right = currentState.xPixel + 48;
                         moveRoom(localStorage.lobbykey, char._id, floorNumber, roomNumber.leftExit);
-                    } else if (roomNumber.leftExit === -1 && currentState.xPixel - 8 < 64) {
+                    } else if (roomNumber.leftExit === -1 && currentState.xPixel - 8 < gameVariables.tileWidth) {
                         currentState.xPixel = currentState.xPixel;
                     } else {
                         currentState.xPixel -= 8;
@@ -172,7 +174,7 @@ class DisplayCharacters extends React.Component {
                     }
                 }
 
-                currentState.xPos = Math.round(currentState.xPixel / 64); 
+                currentState.xPos = Math.round(currentState.xPixel / gameVariables.tileWidth); 
                 currentState.animation = "runningLeft"
                 break;
             case "right":
@@ -193,7 +195,7 @@ class DisplayCharacters extends React.Component {
                     }
                 }
 
-                currentState.xPos = Math.round(currentState.xPixel / 64); 
+                currentState.xPos = Math.round(currentState.xPixel / gameVariables.tileWidth); 
                 currentState.animation = "runningRight"
                 break;
             case "space":
